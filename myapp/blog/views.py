@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 import logging
 from .models import Post
+from django.http import Http404
 
 # Create your views here.
 #posts = [
@@ -24,9 +25,14 @@ def detail(request, post_id):
  #  post = next((item for item in posts if item['id'] == int(post_id)), None)
  
  #getting data from database
- 
-    post = Post.objects.get(pk=post_id)
- 
+    try:
+        
+        post = Post.objects.get(pk=post_id)
+        
+    except Post.DoesNotExist:
+        
+        raise Http404("Post Does not Exist!")
+    
  #  logger = logging.getLogger("TESTING")
  #  logger.debug(f'post variable is {post}')
     return render(request, "blog/detail.html", {"post": post})
