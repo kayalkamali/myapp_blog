@@ -4,111 +4,84 @@ from django.core.management.base import BaseCommand
 import random
 
 class Command(BaseCommand):
-    help = "This command inserts post data"
-    
-    def handle(self, *args: Any,  **options: Any):
-        
-        titles = [
-    "Web Development Bootcamp",
-    "Data Science with Python",
-    "Cybersecurity Essentials",
-    "Mobile App Development",
-    "Artificial Intelligence & Machine Learning",
-    "Digital Marketing for Beginners",
-    "Cloud Computing Fundamentals",
-    "Digital Marketing Strategies", 
-    "Graphic Design Mastery",
-    "Project Management Professional (PMP)",
-    "Full Stack Developer Course",
-    "UI/UX Design Principles",
-    "Data Analysis with R",
-    "Ethical Hacking Techniques",
-    "Python for Data Science",
-    "Java Programming",
-    "Digital Marketing Masterclass",
-    "Web Development with React",
-    "Data Visualization with Tableau",
-    "Cybersecurity for Beginners",
-    "Mobile App Development with Flutter",
-    "Machine Learning with TensorFlow",
-    "Python for Beginners",
-    "JavaScript for Beginners",
-    "HTML & CSS for Beginners",
-    "SQL for Data Science",
-    "Digital Marketing Analytics",
-    "Data Science with R",
-    "Python for Data Analysis",
+    help = "This commands inserts post data"
 
-]
-        
+    def handle(self, *args: Any, **options: Any):
+        # Delete existing data 
+        Post.objects.all().delete()
+
+        titles = [
+            "The Future of AI",
+            "Climate Change Solutions",
+            "Remote Work Trends",
+            "Quantum Computing Explained",
+            "Renewable Energy Innovations",
+            "Deep Learning Demystified",
+            "Post-Pandemic Economic Outlook",
+            "Blockchain in Finance",
+            "Storytelling in Marketing",
+            "Medical Technology Advances",
+            "Space Exploration Challenges",
+            "Psychology of Decision Making",
+            "Evolution of Social Media",
+            "The Art of Cooking",
+            "Cultural Diversity in Society",
+            "Sustainable Development Investments",
+            "Globalization Impact",
+            "Power of Mindfulness",
+            "Online Learning Revolution",
+            "Art and Technology Fusion",
+        ]
+
         contents = [
-    "A comprehensive program covering HTML, CSS, JavaScript, and modern web frameworks to build responsive websites from scratch.",
-    "Learn data analysis, visualization, and machine learning using Python libraries like pandas, NumPy, and scikit-learn.",
-    "An introductory course focused on fundamental cybersecurity principles, threats, and protection strategies.",
-    "Explore native and cross-platform mobile app development using industry-standard tools and best practices.",
-    "Dive into AI concepts and machine learning models with hands-on projects using Python-based tools and frameworks.",
-    "Learn SEO, social media, content marketing, and email campaigns to promote products and services online.",
-    "Understand cloud service models, architecture, and key providers like AWS, Azure, and Google Cloud.",
-    "Advanced tactics for campaign planning, analytics, audience targeting, and digital brand management.",
-    "Master design principles and software like Adobe Photoshop and Illustrator for professional visual content creation.",
-    "Preparation for the PMP certification with training in project planning, execution, monitoring, and closure.",
-    "Covers both front-end (HTML/CSS, JavaScript, React) and back-end (Node.js, MongoDB, SQL) development skills.",
-    "Learn user interface design, user experience strategies, wireframing, and prototyping tools like Figma.",
-    "Use R programming for statistical analysis, data visualization, and predictive modeling.",
-    "Introduction to penetration testing, vulnerability assessment, and ethical hacking tools and techniques.",
-    "A focused course on using Python for data manipulation, exploration, and machine learning.",
-    "Learn core Java concepts, OOP principles, and application development from beginner to intermediate level.",
-    "A complete digital marketing course covering strategy, automation, analytics, and real-world case studies.",
-    "Build modern, component-based web applications using React.js, including hooks, state, and routing.",
-    "Create interactive dashboards and visual analytics using Tableau to derive insights from complex data.",
-    "Entry-level training in digital security basics, including firewalls, encryption, and network safety.",
-    "Design and build cross-platform mobile apps using Google’s Flutter framework and Dart language.",
-    "Build and deploy machine learning models using TensorFlow and Keras for real-world applications.",
-    "Learn Python fundamentals including variables, loops, functions, and simple projects for practice.",
-    "Covers JavaScript basics, DOM manipulation, and interactive web elements with practical examples.",
-    "An introduction to web structure and styling through hands-on HTML and CSS projects.",
-    "Learn SQL queries, joins, and data manipulation for working with relational databases in data science.",
-    "Analyze and interpret campaign performance data using Google Analytics and other tracking tools.",
-    "A project-based course teaching statistical computing and machine learning using the R language.",
-    "Master Python tools like pandas, NumPy, and Matplotlib to analyze, clean, and visualize data effectively.",
-]
-        
+            "Exploring the future of artificial intelligence and its impact on society. AI is poised to revolutionize various industries, from healthcare to finance, with its ability to analyze vast amounts of data and make predictions.",
+            "Discovering solutions to combat climate change and protect the environment. Through innovative technologies and sustainable practices, we can mitigate the effects of global warming and preserve our planet for future generations.",
+            "Analyzing trends and challenges in remote work environments. The shift to remote work has reshaped the way we work and collaborate, presenting both opportunities and challenges for organizations and employees.",
+            "An introduction to the principles and applications of quantum computing. Quantum computing holds the promise of solving complex problems that are intractable for classical computers, ushering in a new era of computation.",
+            "Investigating the latest innovations in renewable energy sources. From solar and wind power to biofuels and hydrogen, renewable energy technologies offer sustainable alternatives to fossil fuels and reduce greenhouse gas emissions.",
+            "Understanding the fundamentals of deep learning and neural networks. Deep learning algorithms mimic the human brain's neural networks to analyze complex data and make intelligent decisions, driving advancements in artificial intelligence.",
+            "Examining the economic landscape in the aftermath of the COVID-19 pandemic. The pandemic has reshaped global economies, accelerating digital transformation and highlighting the importance of resilience and adaptability.",
+            "Exploring the potential of blockchain technology in the financial sector. Blockchain technology has the potential to revolutionize financial transactions, offering transparency, security, and efficiency in peer-to-peer transactions.",
+            "Harnessing the power of storytelling to create compelling marketing campaigns. Storytelling is a powerful tool for brands to connect with their audience emotionally and convey their values and messages effectively.",
+            "Highlighting breakthroughs and advancements in medical technology. From precision medicine to telemedicine, medical technology innovations are transforming healthcare delivery and improving patient outcomes worldwide.",
+            "Addressing the obstacles and opportunities in space exploration. With renewed interest in space exploration, we are on the brink of new discoveries and advancements that will expand our understanding of the universe.",
+            "Exploring the psychological factors influencing decision-making processes. Understanding human behavior and cognitive biases can help individuals and organizations make better decisions and achieve their goals.",
+            "Tracing the evolution of social media platforms and their impact on society. Social media has reshaped how we communicate, connect, and consume information, influencing everything from politics to culture.",
+            "Celebrating the art of cooking and culinary creativity. Cooking is not just about nourishment but also about creativity, culture, and community, bringing people together through shared meals and experiences.",
+            "Promoting inclusivity and embracing diversity in modern communities. Embracing diversity fosters innovation, creativity, and mutual respect, creating vibrant and inclusive communities where everyone feels valued and empowered.",
+            "Investigating sustainable development initiatives and their impact on the future. Sustainable development seeks to meet the needs of the present without compromising the ability of future generations to meet their own needs, ensuring a balance between economic growth, environmental protection, and social equity.",
+            "Examining the effects of globalization on local and global economies. Globalization has interconnected economies and societies, facilitating trade, cultural exchange, and technological advancements while also posing challenges such as income inequality and environmental degradation.",
+            "Embracing mindfulness practices for enhanced well-being and productivity. Mindfulness practices, such as meditation and yoga, promote mental clarity, emotional resilience, and overall well-being, enabling individuals to thrive in today's fast-paced world.",
+            "Revolutionizing education through online learning platforms and resources. Online learning platforms offer flexible and accessible education opportunities, democratizing access to knowledge and empowering learners to pursue their educational goals.",
+            "Exploring the intersection of art, design, and technology in the digital age. The convergence of art, design, and technology has led to innovative creations and experiences, blurring the boundaries between physical and digital worlds.",
+        ]
+
         img_urls = [
-    "https://picsum.photos/id/1/800/400",
-    "https://picsum.photos/id/2/800/400",
-    "https://picsum.photos/id/3/800/400",
-    "https://picsum.photos/id/4/800/400",
-    "https://picsum.photos/id/5/800/400",
-    "https://picsum.photos/id/6/800/400",
-    "https://picsum.photos/id/7/800/400",
-    "https://picsum.photos/id/8/800/400",
-    "https://picsum.photos/id/9/800/400",
-    "https://picsum.photos/id/10/800/400",
-    "https://picsum.photos/id/11/800/400",
-    "https://picsum.photos/id/12/800/400",
-    "https://picsum.photos/id/13/800/400",
-    "https://picsum.photos/id/14/800/400",
-    "https://picsum.photos/id/15/800/400",
-    "https://picsum.photos/id/16/800/400",
-    "https://picsum.photos/id/17/800/400",
-    "https://picsum.photos/id/18/800/400",
-    "https://picsum.photos/id/19/800/400",
-    "https://picsum.photos/id/20/800/400",
-    "https://picsum.photos/id/21/800/400",
-    "https://picsum.photos/id/22/800/400",
-    "https://picsum.photos/id/23/800/400",
-    "https://picsum.photos/id/24/800/400",
-    "https://picsum.photos/id/25/800/400",
-    "https://picsum.photos/id/26/800/400",
-    "https://picsum.photos/id/27/800/400",
-    "https://picsum.photos/id/28/800/400",
-    "https://picsum.photos/id/29/800/400",
-]
+            "https://picsum.photos/id/1/800/400",
+            "https://picsum.photos/id/2/800/400",
+            "https://picsum.photos/id/3/800/400",
+            "https://picsum.photos/id/4/800/400",
+            "https://picsum.photos/id/5/800/400",
+            "https://picsum.photos/id/6/800/400",
+            "https://picsum.photos/id/7/800/400",
+            "https://picsum.photos/id/8/800/400",
+            "https://picsum.photos/id/9/800/400",
+            "https://picsum.photos/id/10/800/400",
+            "https://picsum.photos/id/11/800/400",
+            "https://picsum.photos/id/12/800/400",
+            "https://picsum.photos/id/13/800/400",
+            "https://picsum.photos/id/14/800/400",
+            "https://picsum.photos/id/15/800/400",
+            "https://picsum.photos/id/16/800/400",
+            "https://picsum.photos/id/17/800/400",
+            "https://picsum.photos/id/18/800/400",
+            "https://picsum.photos/id/19/800/400",
+            "https://picsum.photos/id/20/800/400",
+        ]
         
         categories = Category.objects.all()
         for title, content, img_url in zip(titles, contents, img_urls):
             category = random.choice(categories)
-            Post.objects.create(title=title, content=content, img_url=img_url, category = category)
-            
-            
-        self.stdout.write(self.style.SUCCESS("Completed inserting post data"))    
+            Post.objects.create(title=title, content=content, img_url=img_url, category=category)
+
+        self.stdout.write(self.style.SUCCESS("Completed inserting Data!"))
