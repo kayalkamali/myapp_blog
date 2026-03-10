@@ -3,14 +3,14 @@ MyApp Blog
 
 A blog web application built with Django that allows users to create, edit, and manage blog posts.
 
-📌 Project Description
+ Project Description
 
 MyApp Blog is a simple blogging platform developed using the Django web framework.
 It allows users to publish blog posts, edit them, and manage content easily.
 
 This project demonstrates the use of Django models, views, templates, and database integration.
 
-🚀 Features
+ Features
 
 User-friendly blog interface
 
@@ -24,7 +24,7 @@ Database integration
 
 Django authentication system
 
-🛠️ Technologies Used
+ Technologies Used
 
 Python
 
